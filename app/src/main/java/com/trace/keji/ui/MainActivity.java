@@ -12,8 +12,8 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.webkit.JsResult;
-import android.webkit.ValueCallback;
-import android.webkit.WebChromeClient;
+//import android.webkit.ValueCallback;
+//import android.webkit.WebChromeClient;
 import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -38,6 +38,8 @@ import com.tencent.smtt.sdk.CookieSyncManager;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
+import com.tencent.smtt.sdk.WebChromeClient;
+import  com.tencent.smtt.sdk.ValueCallback;
 
 import java.io.File;
 
@@ -55,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private LDialog dialog;
     public MyApplication myApp;
     public ValueCallback<Uri> mUploadMessage;
+    public ValueCallback<Uri[]> mFilePathCallback;
     public ScanCallback mScanCallback;
     public PreferenceUtil pfUserInfo;
 
@@ -89,6 +92,13 @@ public class MainActivity extends AppCompatActivity {
         webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
         CookieSyncManager.createInstance(this);
         CookieSyncManager.getInstance().sync();
+
+        mWebView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancelFilePathCallback();
+            }
+        });
 
         mWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
 
@@ -131,6 +141,16 @@ public class MainActivity extends AppCompatActivity {
                 mUploadMessage = uploadMsg;
 
                 startActivityForResult(createDefaultOpenableIntent(), FILECHOOSER_RESULTCODE);
+            }
+
+            public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
+                if(mFilePathCallback != null) {
+                    return  false;
+                }
+
+                mFilePathCallback = filePathCallback;
+                startActivityForResult(createDefaultOpenableIntent(), 15);
+                return true;
             }
         });
 
@@ -315,13 +335,23 @@ public class MainActivity extends AppCompatActivity {
         return cameraIntent;
     }
 
+    private void cancelFilePathCallback() {
+        if (mUploadMessage != null) {
+            mUploadMessage.onReceiveValue(null);
+            mUploadMessage = null;
+        } else if (mFilePathCallback != null) {
+            mFilePathCallback.onReceiveValue(null);
+            mFilePathCallback = null;
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         //扫描二维码返回结果
         IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (scanResult != null && !TextUtils.isEmpty(scanResult.getContents())) {
             String str = scanResult.getContents();
-            ToastUtil.showLongToast(MainActivity.this,str);
+            ToastUtil.showLongToast(MainActivity.this, str);
             if (mScanCallback != null) {
                 if (mScanCallback.data.callbackData == null || mScanCallback.data.callbackData.equals("")) {
                     // 执行扫描二维码回调的JS
@@ -348,6 +378,20 @@ public class MainActivity extends AppCompatActivity {
                 }
                 mUploadMessage.onReceiveValue(result);
                 mUploadMessage = null;
+            } else if (requestCode == 15) {
+                if (null == mFilePathCallback) {
+                    return;
+                }
+                Uri result = null;
+                result = data == null ? null :  data.getData();
+                if (result == null) {
+                    result = mOutPutFileUri;
+                }
+
+                Uri[] resuts = new Uri[]{ result };
+
+                mFilePathCallback.onReceiveValue(resuts);
+                mFilePathCallback = null;
             }
             // 扫描二维码回调
             else if (requestCode == SCANQRCODE_RESULTCODE) {
@@ -365,15 +409,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         } else if (resultCode == 0 || data == null) {
-            if (mUploadMessage != null) {
-                mUploadMessage.onReceiveValue(null);
-                mUploadMessage = null;
-            }
+            cancelFilePathCallback();
+        } else if (resultCode == RESULT_CANCELED) {
+            cancelFilePathCallback();
         }
     }
 
     /**
      * 帮助提示
+     *
      * @param
      */
     public void helpTipDialog(final HelpTipModel model) {
@@ -384,8 +428,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
 
-                        if(model.data.callbackData != null && !model.data.callbackData.equals("")){
-                            mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "("+true+", $.shagriReplace(\'"+model.data.callbackData+"\','all',false))");
+                        if (model.data.callbackData != null && !model.data.callbackData.equals("")) {
+                            mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "(" + true + ", $.shagriReplace(\'" + model.data.callbackData + "\','all',false))");
                         } else {
                             mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "(true)");
                         }
@@ -394,9 +438,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
-                        if(model.data.callbackData != null && !model.data.callbackData.equals("")){
+                        if (model.data.callbackData != null && !model.data.callbackData.equals("")) {
 //							myWebview.loadUrl("javascript:" + model.data.callbackMethodName + "("+false+", \'"+model.data.callbackData+"\')");
-                            mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "("+false+", $.shagriReplace(\'"+model.data.callbackData+"\','all',false))");
+                            mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "(" + false + ", $.shagriReplace(\'" + model.data.callbackData + "\','all',false))");
                         } else {
                             mWebView.loadUrl("javascript:" + model.data.callbackMethodName + "(false)");
                         }
