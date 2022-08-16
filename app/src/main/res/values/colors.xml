@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6871F1</color>
+    <color name="colorPrimaryDark">#6871F1</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white1">#FCFDFF</color>
+    <color name="black">#000000</color>
+    <color name="red">#fb2b69</color>
+
+    <color name="qian_blue">#5FA8F4</color><!--浅蓝色 -->
+
+    <color name="title">#40733B</color>
+    <color name="top_tv_color">#036A01</color>
+    <color name="gray_shen">#E5E6E7</color>
+    <color name="gray_qian">#F1F1F2</color>
+
+    <color name="item_line1">#DDDDDD</color>
+    <color name="item_line2">#DEDEDE</color>
+
+    <color name="green_sheng">#1b7f0b</color>
+    <color name="green_qian">#66cc33</color>
+    <color name="coffee">#553012</color>
+
+    <color name="gray">#828282</color>
+
+    <color name="blue">#0000ff</color><!--蓝色 -->
+
+    <color name="title_nq_bule_bg">#4682BE</color>
+    <color name="baby_bule_bg">#E9F4FA</color>
+    <color name="blue_tv">#00399A</color>
+    <color name="blue_tv2">#236E91</color>
+
+
+
+    <drawable name="green_sheng">#1b7f0b</drawable>
+    <drawable name="green_qian">#66cc33</drawable>
+    <drawable name="coffee">#553012</drawable>
+
+
+    <drawable name="green_">#28A439</drawable>
+    <drawable name="green_bg">#E7F5E4</drawable>
+
+    <drawable name="green_sheng2">#D0FDD9</drawable>
+    <drawable name="green_qian2">#D0FDD9</drawable>
+    <drawable name="coffee2">#FFCE9D</drawable>
+    <drawable name="orange">#FF6600</drawable>
+
+    <drawable name="yellow_high">#ffe25b</drawable>
+
+    <drawable name="gray_shen">#E5E6E7</drawable>
+    <drawable name="gray_qian">#F1F1F2</drawable>
+
+    <drawable name="transparent">#00000000</drawable>
+    <drawable name="white">#FFFFFF</drawable>
+    <drawable name="black">#000000</drawable>
+
+    <drawable name="title">#40733B</drawable>
+
+
+    <color name="viewfinder_frame">#ff000000</color>
+    <color name="viewfinder_laser">#ffff0000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="result_view">#b0000000</color>
+</resources>

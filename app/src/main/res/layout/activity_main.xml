@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/idForStatusBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.MainActivity">
+
+    <Button
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:text="jump"
+            android:id="@+id/btnJump"
+            android:layout_height="wrap_content"/>
+
+    <com.tencent.smtt.sdk.WebView
+            android:id="@+id/mywebview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="0dp">
+    </com.tencent.smtt.sdk.WebView>
+
+</RelativeLayout>

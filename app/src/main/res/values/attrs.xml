@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="TabView">
+        <attr name="tabColor" format="color|integer" />
+        <attr name="tabImage" format="reference" />
+        <attr name="tabSelectedImage" format="reference" />
+        <attr name="tabTitle" format="string|reference" />
+        <attr name="tabMark" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="ZLoadingView">
+        <attr name="z_type">
+            <enum name="CircleBuilder" value="0"/>
+            <enum name="ClockBuilder" value="1"/>
+            <enum name="StarBuilder" value="2"/>
+            <enum name="LeafBuilder" value="3"/>
+            <enum name="DoubleCircleBuilder" value="4"/>
+            <enum name="PacManBuilder" value="5"/>
+            <enum name="ElasticBallBuilder" value="6"/>
+            <enum name="InfectionBallBuilder" value="7"/>
+            <enum name="IntertwineBuilder" value="8"/>
+            <enum name="TextBuilder" value="9"/>
+            <enum name="SearchPathBuilder" value="10"/>
+            <enum name="RotateCircleBuilder" value="11"/>
+            <enum name="SingleCircleBuilder" value="12"/>
+
+            <enum name="SnakeCircleBuilder" value="13"/>
+            <enum name="StairsPathBuilder" value="14"/>
+            <enum name="MusicPathBuilder" value="15"/>
+            <enum name="StairsRectBuilder" value="16"/>
+            <enum name="ChartRectBuilder" value="17"/>
+        </attr>
+        <attr name="z_color" format="color"/>
+        <attr name="z_duration_percent" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="ZLoadingTextView">
+        <attr name="z_text" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="ZzHorizontalProgressBar">
+        <attr name="zpb_padding" format="dimension" />
+        <attr name="zpb_bg_color" format="color|reference" />
+        <attr name="zpb_pb_color" format="color|reference" />
+        <attr name="zpb_second_pb_color" format="color|reference" />
+        <attr name="zpb_max" format="integer" />
+        <attr name="zpb_progress" format="integer" />
+        <attr name="zpb_show_zero_point" format="boolean" />
+        <attr name="zpb_show_second_progress" format="boolean" />
+        <attr name="zpb_second_progress" format="integer" />
+        <attr name="zpb_show_second_point_shape" format="enum">
+            <enum name="point" value="0"/>
+            <enum name="line" value="1"/>
+        </attr>
+        <attr name="zpb_open_gradient" format="boolean" />
+        <attr name="zpb_gradient_from" format="color|reference" />
+        <attr name="zpb_gradient_to" format="color|reference" />
+        <attr name="zpb_open_second_gradient" format="boolean" />
+        <attr name="zpb_second_gradient_from" format="color|reference" />
+        <attr name="zpb_second_gradient_to" format="color|reference" />
+        <attr name="zpb_show_mode" format="enum" >
+            <enum name="round" value="0"/>
+            <enum name="rect" value="1"/>
+            <enum name="round_rect" value="2"/>
+        </attr>
+        <attr name="zpb_round_rect_radius" format="dimension|reference"/>
+        <attr name="zpb_draw_border" format="boolean"/>
+        <attr name="zpb_border_width" format="dimension|reference"/>
+        <attr name="zpb_border_color" format="color|reference"/>
+        <attr name="zpb_text_color" format="color" />
+        <attr name="zpb_text_size" format="dimension" />
+    </declare-styleable>
+</resources>
